@@ -1,0 +1,51 @@
+div.menu-slide-up {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to top right,  #348F50, #56B4D3);
+    transition-duration: 0.5s;
+    top: 0;
+    z-index: 9999;
+}
+
+div.menu-slide-up.close {
+    top: 150%;
+    height: 0;
+}
+
+div.cancel-menu-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 25px;
+    cursor: pointer;
+}
+
+
+div.cancel-menu-btn > div {
+    padding: 5px 35px;
+    margin: 15px 0px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+div.cancel-menu-btn > div:nth-child(1) {
+    transform: rotate(45deg) translate(0px, 17px);
+}
+
+div.cancel-menu-btn > div:nth-child(2) {
+    transform: rotate(-45deg) translate(0px, -16px);
+}
+
+#cons {
+    width: 400px;
+    height: 400px;
+}
+
+#cons-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform: translateY(30%);
+}
+

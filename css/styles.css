@@ -1,0 +1,15 @@
+@import url("global.css");
+
+/* TOP AND BOTTOM */
+@import url("navbar.css");
+@import url("Scroll.css");
+
+/* SLIDE UP MENU */
+@import url("SlideMenu.css");
+
+/* SLIDES */
+@import url("Intro.css");
+@import url("Story.css");
+@import url("final.css");
+
+
