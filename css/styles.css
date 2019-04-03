@@ -1,15 +1,169 @@
-@import url("global.css");
+@import url("common.css");
 
-/* TOP AND BOTTOM */
-@import url("navbar.css");
-@import url("Scroll.css");
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background: black;
+}
 
-/* SLIDE UP MENU */
-@import url("SlideMenu.css");
+/* NAV */
 
-/* SLIDES */
-@import url("Intro.css");
-@import url("Story.css");
-@import url("final.css");
+nav {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    height: 10%;
+}
 
 
+div#logo-container > span {
+    display: inline-block;
+    transition: .5s linear;
+}
+
+div#logo-container:hover > span {
+    color: springgreen;
+}
+
+span.sup {
+    position: relative;
+    font-size: 60%;
+}
+
+/* NAV ENDS */
+
+/* SLIDER */
+
+#slide-panel {
+    background-image: linear-gradient(to top right,  #348F50, #56B4D3);
+    z-index: 9999;
+}
+
+/* SLIDER ENDS */
+
+/* INTRO */
+
+#intro {
+    background-image: linear-gradient(to left,#5C258D , #4389A2);
+}
+
+.intro-text {
+    margin: auto 0;
+}
+/* INTRO ENDS */
+
+/* STORY */
+#particle-content-box {
+    width: 40vw;
+    height: 40vw;
+    z-index: 1;
+    border: 7px solid white;
+    right: 0; left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: -200%;
+    overflow: hidden;
+}
+
+#particle-content-main-container {
+    margin-left: 2%;
+    left: -50%;
+    
+}
+
+
+#particle-content-description {
+    margin-right: 2%;
+    bottom: -50%;
+}
+
+
+@media screen and (max-width: 1000px) {
+    #particle-content-box {
+        width: 40vh;
+        height: 40vh;
+    }
+    
+}
+
+
+#designer-text, #coder-text {
+    opacity: 0;
+    top: 20%;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    min-height: 60px;
+    border: 1px solid white;
+    border-radius: 60px;
+    cursor: pointer;
+    margin: 20px;
+
+}
+
+.icon:hover {
+    background-color: rgba(255, 255, 255, 0.363);
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+
+.icon > a {
+    text-decoration: none;
+    color: white;
+    font-size: xx-large;
+}
+
+#details {
+    overflow: hidden;
+}
+#final-bg {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-color: #348cb2;
+    background-size: 800px;
+    background-image: url("../images/bg.jpg");
+    background-repeat: repeat-x;
+    background-position: bottom;
+    animation: slide 20s infinite linear;
+}
+
+@keyframes slide {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-800px, 0, 0); 
+    }
+}
+
+.scroll-icon {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.scroll-icon > img {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 20px 0;
+    filter: invert(100%);
+    animation: 0.5s scroll-anim infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+}
+
+@keyframes scroll-anim {
+    from {opacity: 0;
+        transform: translateY(10%)}
+    to {opacity: 1;
+        transform: translateY(0%)}
+}

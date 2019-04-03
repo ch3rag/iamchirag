@@ -1,0 +1,343 @@
+@font-face {
+    font-family: 'Trim';
+    color: white;
+    src: url('fonts/TrimWeb.woff') format('woff');
+}
+
+.panel {
+    width: 100%;
+    height: 100vh;
+    transition-duration: 1s;
+    margin: 0;
+}
+
+.show {
+    right: 0;
+}
+.hide-right {
+    right: -200%;
+}
+
+.trim {
+    font-family: "Trim";
+}
+
+.white {
+    color: white;
+}
+
+.large {
+    font-size: 4vw;
+}
+
+.vvvlarge {
+    font-size: 10vw;
+}
+
+.vlarge {
+    font-size: 5vw;
+}
+
+.vvlarge {
+    font-size: 8vw;
+}
+
+.medium {
+    font-size: 3vw;
+}
+
+.small {
+    font-size: 2vw;
+}
+
+.vsmall {
+    font-size: 1vw;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.bolder {
+    font-weight: bolder;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.relative {
+    position: relative;
+}
+
+.top {
+    top: 0;
+}
+
+.left {
+    left: 0;
+}
+.right {
+    right: 0;
+}
+
+.bottom {
+    bottom: 0;
+}
+
+.float-right {
+    float: right;
+}
+
+.condensed {
+    letter-spacing: -0.5vw;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.half-height {
+    height: 50%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.one-third-height {
+    height: 32%;
+}
+
+.one-third-width {
+    width: 32%;
+}
+
+.two-third-height {
+    height: 65%;
+}
+
+.two-third-width {
+    width: 65%;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center-horizontal {
+    justify-content: center;
+}
+
+.flex-center-vertical {
+    align-items: center;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.flex-space-between {
+    justify-content: space-between;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.absolute-center {
+    top: 0; left: 0; right: 0; bottom: 0;
+    margin: auto auto;
+}
+
+.absolute-middle-vertical {
+    top: 0; bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.absolute-middle-horizontal {
+    left: 0; right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.auto-height {
+    height: auto;
+}
+
+.block {
+    display: block;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.bg-blue {
+    background-color: blue;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.hide {
+    display: none;
+}
+.blink {
+    opacity: 1;
+    animation: 0.2s blink infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+
+.margin-10-percent {
+    margin: 10px;
+}
+
+
+.z-top-10 {
+    z-index: 9999;
+}
+
+@keyframes blink {
+    from { opacity: 0;} 
+    to   { opacity: 1;}
+}
+
+.menu-button {
+    display: inline-block;
+    transition-duration: 0.5s;
+    margin: 1vw;
+    width: 5vw;
+}
+
+.cancel-menu-button {
+    width: 6vw;
+    height: 6vw;
+}
+
+.menu-button:hover {
+    transform: rotateY(45deg);
+}
+
+.menu-button > div {
+    padding: 0.3vw 0.0vw;
+    margin: 0.5vw 0vw;
+    display: block;
+    background-color: #ffffff;
+    border-radius: 3px;
+
+}
+
+.cancel-menu-button > div {
+    top:0; left:0; right: 0; bottom: 0; 
+    margin: auto auto;
+    background-color: white;
+    width: 0.5vw;
+    padding: 0.2vw;
+    position: absolute;
+    border-radius: 5px;
+}
+
+.cancel-menu-button > div:nth-child(1) {
+    transform: rotate(45deg);
+
+}
+.cancel-menu-button > div:nth-child(2) {
+    transform: rotate(-45deg);
+}
+
+
+@media screen and (max-width: 1000px) {
+
+    .large {
+        font-size: 4vh;
+    }
+    
+    .vlarge {
+        font-size: 5vh;
+    }
+    
+    .vvlarge {
+        font-size: 8vh;
+    }
+
+    .vvvlarge {
+        font-size: 10vh;
+    }
+    
+    .medium {
+        font-size: 3vh;
+    }
+    
+    .small {
+        font-size: 2vh;
+    }
+    
+    .vsmall {
+        font-size: 1vh;
+    }
+
+    .menu-button {
+        margin: 1vh;
+        width: 5vh;
+    }
+    
+    
+    .menu-button > div {
+        padding: 0.3vh 0.0vh;
+        margin: 0.5vh 0vh;
+    }
+
+    .cancel-menu-button > div {
+        width: 0.5vh;
+        padding: 0.2vh;
+    }
+    
+    .cancel-menu-button {
+        width: 6vh;
+        height: 6vh;
+    }
+}
+
+
+.margin-top-10 {
+    margin: auto;
+    display: block;
+    background-color: blueviolet;
+}
