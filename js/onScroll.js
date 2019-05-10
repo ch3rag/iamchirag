@@ -67,31 +67,30 @@ class OnScroll {
 
     //SETUP WINDOW SCROLL EVENT LISTENERS AND CHECKS FOR EVENTS
     _setupListeners() {
-        let raf = window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            window.oRequestAnimationFrame;
-        _WINDOW_SCROLL_POSITION_ = window.pageYOffset;
-        var _PREVIOUS_POSITION_ = -1;
         var _ONS_ = this;
-
-        function _RAF_() {
+        function run() {
             _WINDOW_SCROLL_POSITION_ = window.pageYOffset;
-            if(_WINDOW_SCROLL_POSITION_ === _PREVIOUS_POSITION_) {
-
-            } else {
-                for (const e of _ONS_._events) {
-                    // EACH EVENT HAS REFRENCE TO IT'S OWN EVENT CHECKER
-                    e._eventChecker(e);     //CHECKS STATES AND EXECUTES EVENTS
-                }
-                _PREVIOUS_POSITION_ = _WINDOW_SCROLL_POSITION_;
+            for (const e of _ONS_._events) {
+                // EACH EVENT HAS REFRENCE TO IT'S OWN EVENT CHECKER
+                e._eventChecker(e);     //CHECKS STATES AND EXECUTES EVENTS
             }
-            raf(_RAF_);
         }
-        _RAF_();
+        window.addEventListener("scroll", OnScroll.throttle(run, 200));
     }
 
+    static throttle (callback, limit) {
+
+        var wait = false;                 
+        return function () {             
+            if (!wait) {                   
+                callback.call();          
+                wait = true;              
+                setTimeout(function () { 
+                    wait = false;          
+                }, limit);
+            }
+        }
+    }
 
     // CREATES AN INDICATOR OF SPECIFIC TYPE
     // X IS THE POISTION OF THE INDICATOR IN PIXELS
@@ -248,8 +247,8 @@ class OnScroll {
 
         // RELEASING PIN
         let pinPropertiesEXIT = `
-        e._targetPinElem.style.removeProperty("position")
-        e._targetPinElem.style.removeProperty("top")`;
+        e._targetPinElem.style.removeProperty("position");
+        e._targetPinElem.style.removeProperty("top");`;
 
         // FOR DURATION BASED
         let pinPropertiesEXITDuration = `
@@ -281,10 +280,10 @@ class OnScroll {
         }`;
 
         let checkTimelineExit = `
-        if(e._timelineState == __EVENT_STATES__.__FINISHED__) {
+        if(e._timelineState == ${__EVENT_STATES__.__FINISHED__}) {
             // REVERSE IT
             OnScroll._reverse(e);
-        } else if(e._timelineState == __EVENT_STATES__.__RUNNING_FORWARD__) {
+        } else if(e._timelineState == ${__EVENT_STATES__.__RUNNING_FORWARD__}) {
             // CANCEL IT
             e._timeline[e._timelineIndex].elem.removeEventListener("transitionend", e._extras._timelineHandler);
             OnScroll._reverse(e);
@@ -320,10 +319,10 @@ class OnScroll {
 
                         e._eventState = ${__EVENT_STATES__.__INITIAL__};
 
-                    } else`;
+                    }`;
             }
-            funcString += `
-                if(_WINDOW_SCROLL_POSITION_ > ${e._scrollPosition} && _WINDOW_SCROLL_POSITION_ < ${e._scrollPositionEnd}) {
+            funcString += ` 
+            else if(_WINDOW_SCROLL_POSITION_ > ${e._scrollPosition} && _WINDOW_SCROLL_POSITION_ < ${e._scrollPositionEnd}) {
                     
                     var offset  = _WINDOW_SCROLL_POSITION_ - e._scrollPosition;
                     var duration = e._duration;
@@ -360,7 +359,7 @@ class OnScroll {
 
             if (e._transformationObject || e._timeline || e._extras.css || e._targetPinElem || e._extras.exit) {
                 funcString +=
-                    `else if(_WINDOW_SCROLL_POSITION_ > ${e._scrollPositionEnd} && e._eventState != ${__EVENT_STATES__.__FINISHED__}) {
+                    `else if (_WINDOW_SCROLL_POSITION_ > ${e._scrollPositionEnd} && e._eventState != ${__EVENT_STATES__.__FINISHED__}) {
                         
                         // SET ESTYLE    
                         ${e._transformationObject ? setEStyle : ""}
@@ -410,7 +409,7 @@ class OnScroll {
                     ${e._targetPinElem ? pinPropertiesENTER : ""}
 
                     //SET EVENT STATE
-                    e._eventState = ${__EVENT_STATES__.__FINISHED__}
+                    e._eventState = ${__EVENT_STATES__.__FINISHED__};
 
                 } else if (_WINDOW_SCROLL_POSITION_ < ${e._scrollPosition} && e._eventState == ${__EVENT_STATES__.__FINISHED__}) {
 
@@ -432,13 +431,14 @@ class OnScroll {
                     ${e._targetPinElem ? pinPropertiesEXIT : ""}
 
                     // SET EVENT STATE
-                    e._eventState = ${__EVENT_STATES__.__INITIAL__}
+                    e._eventState = ${__EVENT_STATES__.__INITIAL__};
                 }})`;
         }
 
-        // funcString = funcString.replace(/\/\/.*\n/gm, "");
-        // funcString = funcString.replace(/[\n\t]/gm, "");
-        // funcString = funcString.replace(/\s{2,}/gm, "");
+        funcString = funcString.replace(/\/\/.*\n/gm, "");
+        funcString = funcString.replace(/[\n\t]/gm, "");
+        funcString = funcString.replace(/\s{2,}/gm, "");
+        console.log(funcString);
         return eval(funcString);
     }
     static _computedToInlineCSS(source, dest, arr) {
@@ -459,9 +459,9 @@ class OnScrollEvent {
         // IF TRIGGER NOT FOUND OR PASSED
         if (!this._triggerElem)
             throw "INVALID TRIGGER ELEMENT";
-        this._triggerPosition = obj.triggerPosition != undefined? (obj.triggerPosition / 100) : 0;
+        this._triggerPosition = obj.triggerPosition != undefined ? (obj.triggerPosition / 100) : 0;
         this._triggerPosition *= (window.screen.height);
-        this._duration = obj.duration != undefined? OnScroll._parseUnit(obj.duration) : 0;
+        this._duration = obj.duration != undefined ? OnScroll._parseUnit(obj.duration) : 0;
         this._scrollPosition = OnScroll._getYOffsetDocument(this._triggerElem) - this._triggerPosition;
         this._scrollPositionEnd = this._scrollPosition + this._duration;
 
@@ -533,11 +533,11 @@ class OnScrollEvent {
                     this._extras.progress += `(${callback})();\n`;
                     break;
                 case "exit-top":
-                    if(!this._extras.exitTop) this._extras.exitTop = "";
+                    if (!this._extras.exitTop) this._extras.exitTop = "";
                     this._extras.exitTop += `(${callback})();\n`;
                     break;
                 case "exit-bottom":
-                    if(!this._extras.exitBottom) this._extras.exitBottom = "";
+                    if (!this._extras.exitBottom) this._extras.exitBottom = "";
                     this._extras.exitBottom += `(${callback})();\n`;
                     break;
             }
